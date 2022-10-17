@@ -29,10 +29,11 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234567890'),
         ]);
 
-        Permission::create(['name' => 'approve delete']);
-        $roleAdmin = Role::create(["name" => "admin"]);
-        $roleAdmin->givePermissionTo('approve-delete');
+        Permission::create(['name' => 'approve-delete']);
 
-        $admin->assignRole($roleAdmin);
+        $role1 = Role::create(['name' => 'admin']);
+        $role1->givePermissionTo('approve-delete');
+
+        $admin->assignRole($role1);
     }
 }
