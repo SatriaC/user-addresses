@@ -31,6 +31,11 @@ class UserController extends Controller
         return $this->service->update($request, $id);
     }
 
+    public function findNearestLocation(Request $request, $id)
+    {
+        return $this->service->findNearestLocation($request, $id);
+    }
+
     public function show($id)
     {
         return $this->service->show($id);

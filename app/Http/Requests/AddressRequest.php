@@ -28,6 +28,8 @@ class AddressRequest extends FormRequest
         return [
             'name'=>'required',
             'address'=>'required',
+            'latitude'=>'required',
+            'longitude'=>'required',
         ];
     }
 

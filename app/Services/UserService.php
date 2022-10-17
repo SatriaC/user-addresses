@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Repositories\AddressRepository;
 use App\Repositories\UserRepository;
 use App\Services\BaseService;
 use Exception;
@@ -11,12 +12,15 @@ use Illuminate\Support\Facades\Log;
 class UserService extends BaseService
 {
     protected $repo;
+    protected $repoAddress;
 
     public function __construct(
-        UserRepository $repo
+        UserRepository $repo,
+        AddressRepository $repoAddress,
     ) {
         parent::__construct();
         $this->repo = $repo;
+        $this->repoAddress = $repoAddress;
     }
 
     public function index()
@@ -68,6 +72,19 @@ class UserService extends BaseService
             Log::error($exc);
             $db->rollback();
             return $this->responseMessage(__('content.message.update.failed'), 400, false);
+        }
+    }
+
+    public function findNearestLocation($request, $id)
+    {
+        try {
+            $item = $this->repo->getById($id);
+            $data = $this->repoAddress->findNearestLocation($request, $item);
+
+            return $this->responseMessage(__('content.message.read.success'), 200, true, $data);
+        } catch (Exception $exc) {
+            Log::error($exc);
+            return $this->responseMessage(__('content.message.read.failed'), 400, false);
         }
     }
 

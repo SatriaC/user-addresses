@@ -36,6 +36,11 @@ class AddressController extends Controller
         return $this->service->show($id);
     }
 
+    public function setDefault($id)
+    {
+        return $this->service->setDefault($id);
+    }
+
     public function deleteApproved($id)
     {
         return $this->service->deleteApproved($id);
