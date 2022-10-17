@@ -24,10 +24,10 @@ class AddressService extends BaseService
         $this->user = Auth::guard('api')->user();
     }
 
-    public function index()
+    public function index($request)
     {
         try {
-            $data = $this->repo->all();
+            $data = $this->repo->getAll($request);
 
             return $this->responseMessage(__('content.message.read.success'), 200, true, $data);
         } catch (Exception $exc) {

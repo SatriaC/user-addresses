@@ -14,6 +14,16 @@ class AddressRepository extends BaseRepository
         $this->model = $model;
     }
 
+    public function getAll($request)
+    {
+        $data = $this->model;
+        if (isset($request->user_id)) {
+            $data = $data->where('user_id', $request->user_id);
+        }
+
+        return $data->get();
+    }
+
     public function getByDefaultIs1()
     {
         $data = $this->model

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AddressRequest;
 use App\Services\AddressService;
+use Illuminate\Http\Request;
 
 class AddressController extends Controller
 {
@@ -16,9 +17,9 @@ class AddressController extends Controller
         $this->middleware('permission:approve-delete', ['only' => ['deleteApproved']]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return $this->service->index();
+        return $this->service->index($request);
     }
 
     public function store(AddressRequest $request)
