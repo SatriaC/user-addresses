@@ -69,7 +69,31 @@ class AddressService extends BaseService
         }
     }
 
-    public function deleteAddproved($id)
+    public function setDefault($id)
+    {
+        $db = DB::connection($this->connection);
+        $db->beginTransaction();
+        try {
+            $getDefault = $this->repo->getByDefaultIs1();
+            if (isset($getDefault)) {
+                $dataLastDefault['is_default'] = 0;
+                $this->repo->update($dataLastDefault, $getDefault->id);
+            }
+            $data['is_default'] = 1;
+            $this->repo->update($data, $id);
+            $db->commit();
+
+            $item = $this->repo->getById($id);
+
+            return $this->responseMessage(__('content.message.update.success'), 200, true, $item);
+        } catch (Exception $exc) {
+            Log::error($exc);
+            $db->rollback();
+            return $this->responseMessage(__('content.message.update.failed'), 400, false);
+        }
+    }
+
+    public function deleteApproved($id)
     {
         $db = DB::connection($this->connection);
         $db->beginTransaction();

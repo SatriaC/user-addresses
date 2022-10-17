@@ -13,7 +13,7 @@ class AddressController extends Controller
     )
     {
         $this->service = $service;
-        $this->middleware('permission:approve-delete', ['only' => ['deleteAddproved']]);
+        $this->middleware('permission:approve-delete', ['only' => ['deleteApproved']]);
     }
 
     public function index()
@@ -36,9 +36,9 @@ class AddressController extends Controller
         return $this->service->show($id);
     }
 
-    public function deleteAddproved($id)
+    public function deleteApproved($id)
     {
-        return $this->service->deleteAddproved($id);
+        return $this->service->deleteApproved($id);
     }
 
     public function destroy($id)
