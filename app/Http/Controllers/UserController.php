@@ -14,6 +14,10 @@ class UserController extends Controller
     )
     {
         $this->service = $service;
+        $this->middleware('permission:user-add', ['only' => ['store']]);
+        $this->middleware('permission:user-update', ['only' => ['update']]);
+        $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:user-nearest', ['only' => ['findNearestLocation']]);
     }
 
     public function index(Request $request)

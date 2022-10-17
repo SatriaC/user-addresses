@@ -14,7 +14,7 @@ class AddressController extends Controller
     )
     {
         $this->service = $service;
-        $this->middleware('permission:approve-delete', ['only' => ['deleteApproved']]);
+        $this->middleware('permission:address-approval', ['only' => ['deleteApproved']]);
     }
 
     public function index(Request $request)
