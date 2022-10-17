@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
 use App\Services\UserService;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -25,7 +26,7 @@ class UserController extends Controller
         return $this->service->store($request);
     }
 
-    public function update(UserRequest $request, $id)
+    public function update(Request $request, $id)
     {
         return $this->service->update($request, $id);
     }

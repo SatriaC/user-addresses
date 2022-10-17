@@ -37,6 +37,7 @@ class UserService extends BaseService
         $db->beginTransaction();
         try {
             $data = $request->all();
+            $data['password'] = bcrypt($request->password);
             $item = $this->repo->create($data);
             $db->commit();
 
@@ -54,6 +55,9 @@ class UserService extends BaseService
         $db->beginTransaction();
         try {
             $data = $request->all();
+            if (isset($request->password)) {
+                $data['password'] = bcrypt($request->password);
+            }
             $this->repo->update($data, $id);
             $db->commit();
 
