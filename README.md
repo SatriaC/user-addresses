@@ -1,3 +1,6 @@
+### Prerequisites
+Please make sure you have the configuration of SMTP. If you don't have you can use the trial of mailtrap. You can check here [Official Documentation](https://mailtrap.io/)
+
 ## Installing / Getting started
 
 Please check the official laravel installation guide for server requirements before you start. [Official Documentation](https://laravel.com/docs/8.x)
