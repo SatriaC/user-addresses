@@ -134,8 +134,7 @@ class AddressService extends BaseService
         try {
             $item = $this->repo->getById($id);
             if ($item->is_approved == 0) {
-                // @TODO make notification to admin
-                Notification::send($this->user, new ApprovalNotification());
+                $this->user->notify(new ApprovalNotification());
                 return $this->responseMessage(__('content.message.approval.waiting'), 200, true);
             }
             $this->repo->delete($id);
