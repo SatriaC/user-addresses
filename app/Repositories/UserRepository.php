@@ -12,6 +12,17 @@ class UserRepository extends BaseRepository
         $this->model = $model;
     }
 
+    public function getAll($request)
+    {
+        $data = $this->model;
+
+        if (isset($request->email)) {
+            $data = $data->where('users.email', 'LIKE', '%' . $request->email . '%');
+        }
+
+        return $data->get();
+    }
+
     public function getByEmail($request)
     {
         $data = $this->model->where('email', $request->email)->first();

@@ -23,10 +23,10 @@ class UserService extends BaseService
         $this->repoAddress = $repoAddress;
     }
 
-    public function index()
+    public function index($request)
     {
         try {
-            $data = $this->repo->all();
+            $data = $this->repo->getAll($request);
 
             return $this->responseMessage(__('content.message.read.success'), 200, true, $data);
         } catch (Exception $exc) {
